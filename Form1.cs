@@ -12,14 +12,28 @@ namespace TutorialYt
 {
     public partial class Form1 : Form
     {
+        public Game g = null;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+       
+
+        private void Form1_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Salut " + textBox1.Text + "!");
+           g = new Game();
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
