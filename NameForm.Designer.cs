@@ -48,6 +48,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Ok";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -62,6 +63,7 @@
             // 
             // NameForm
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button2;
@@ -73,7 +75,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NameForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Please Enter Your Name";
+            this.Load += new System.EventHandler(this.NameForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
