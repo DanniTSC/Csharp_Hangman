@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TutorialYt
 {
@@ -89,7 +90,17 @@ namespace TutorialYt
             else if(!label2.Text.Contains('_'))
             {
                DialogResult dr = MessageBox.Show("You Won!\r\nYour score is " + Game.nb_of_lifes + ".\r\n Do you want to start a new game ?", "Congrats", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-               if(dr == DialogResult.Yes)
+                using (FileStream fs = new FileStream("D:\\hangman.dat", FileMode.Append))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs))
+                    {
+                        sw.WriteLine(Game.game_player.Name + "|" + Game.nb_of_lifes + "|" + Game.date_started);
+                    }
+                }
+
+
+
+               if (dr == DialogResult.Yes)
                 {
                     New_game();
                 }
@@ -157,8 +168,8 @@ namespace TutorialYt
                     g.DrawLine(new Pen(Color.Violet), panel1.Width / 2, 120, panel1.Width / 2 - 30, 140);
                     g.DrawLine(new Pen(Color.Violet), panel1.Width / 2, 120, panel1.Width / 2 + 30, 140);
 
-                    g.DrawLine(new Pen(Color.Gray), 120, 5, 60, 100);
-                    g.DrawLine(new Pen(Color.Gray), 120, 5, panel1.Width / 2, 50);
+                    g.DrawLine(new Pen(Color.Gray), 120, 5, 120, 180);
+                    g.DrawLine(new Pen(Color.Gray), 120, 5, panel1.Width / 2, 5);
                     break;
                 case 0:
                     Rectangle rec5 = new Rectangle(panel1.Width / 2 - 20, 10, 40, 40);
@@ -172,13 +183,19 @@ namespace TutorialYt
                     g.DrawLine(new Pen(Color.Violet), panel1.Width / 2, 120, panel1.Width / 2 - 30, 140);
                     g.DrawLine(new Pen(Color.Violet), panel1.Width / 2, 120, panel1.Width / 2 + 30, 140);
 
-                    g.DrawLine(new Pen(Color.Gray), 120, 5, 60, 100);
-                    g.DrawLine(new Pen(Color.Gray), 120, 5, panel1.Width / 2, 50);
+                    g.DrawLine(new Pen(Color.Gray), 120, 5, 120, 180);
+                    g.DrawLine(new Pen(Color.Gray), 120, 5, panel1.Width / 2, 5);
 
-                    g.DrawLine(new Pen(Color.Gray), 120, 5, panel1.Width / 2, 10);
+                    g.DrawLine(new Pen(Color.Gray), 120, 5, panel1.Width / 2, 50);
                     g.DrawString("GAME OVER", new Font(FontFamily.GenericSansSerif,20,FontStyle.Bold), Brushes.Red, panel1.Width / 2 - 60, 60);
                     break;
             }
+        }
+
+        private void highScoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScoresForm sf = new ScoresForm();
+            sf.ShowDialog();
         }
     }
 }
